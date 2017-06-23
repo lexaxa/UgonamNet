@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
     private UgonAdapter ugonAdapter;
     private RecyclerView recyclerView;
 
@@ -50,10 +52,16 @@ public class MainActivity extends AppCompatActivity
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         List<CloneFactory.Ugon> ugonList = CloneFactory.getCloneList(); //Parser.getList();
         ugonAdapter = new UgonAdapter(ugonList);
         recyclerView.setAdapter(ugonAdapter);
+recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener(){
+    @Override
+    public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        super.onTouchEvent(rv, e);
+
+    }
+});
 
     }
 
